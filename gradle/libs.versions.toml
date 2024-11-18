@@ -10,7 +10,6 @@ activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 roomTesting = "2.6.1"
 roomVersion = "2.6.1"
-kaptVersion = "1.8.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
