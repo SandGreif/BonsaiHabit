@@ -1,3 +1,8 @@
+/*
+ * Created by julianmagierski on 14.11.2024
+ * Copyright (c) 2024. All rights reserved.
+ */
+
 package bonsai.habit
 
 import org.junit.Test
