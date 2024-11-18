@@ -10,14 +10,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import bonsai.habit.common.DateTimeTypeConverter
+import bonsai.habit.common.converter.DateTimeTypeConverter
+import bonsai.habit.common.converter.HealthStateTypeConverter
 import bonsai.habit.database.dao.BonsaiDao
 import bonsai.habit.database.dao.BonsaiStateDao
 import bonsai.habit.database.entity.Bonsai
 import bonsai.habit.database.entity.BonsaiState
 
 @Database(entities = [Bonsai::class, BonsaiState::class], version = 1, exportSchema = false)
-@TypeConverters(DateTimeTypeConverter::class)
+@TypeConverters(DateTimeTypeConverter::class, HealthStateTypeConverter::class)
 abstract class BonsaiGardenDatabase : RoomDatabase() {
     abstract fun bonsaiDao(): BonsaiDao
     abstract fun bonsaiStateDao(): BonsaiStateDao

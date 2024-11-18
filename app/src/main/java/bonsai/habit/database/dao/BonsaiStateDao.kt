@@ -16,5 +16,5 @@ interface BonsaiStateDao {
     fun insert(bonsaiState: BonsaiState)
 
     @Query("SELECT * FROM BonsaiState WHERE id = :id")
-    fun getBonsaiStateById(id: Int): BonsaiState
+    fun getById(id: Int): BonsaiState
 }

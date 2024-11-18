@@ -8,6 +8,7 @@ package bonsai.habit.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import bonsai.habit.common.enums.HealthState
 import java.time.LocalDateTime
 
 @Entity
@@ -18,6 +19,8 @@ data class Bonsai(
     val targetTime: Int,
     @ColumnInfo(name = "age")
     val age: Int,
+    @ColumnInfo(name = "healthState")
+    val healthState: HealthState,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now()
 )

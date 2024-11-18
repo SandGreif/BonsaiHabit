@@ -1,5 +1,5 @@
 /*
- * Created by julianmagierski on 16.11.2024
+ * Created by julianmagierski on 18.11.2024
  * Copyright (c) 2024. All rights reserved.
  */
 
@@ -11,9 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import bonsai.habit.common.enums.HealthState
 import bonsai.habit.database.BonsaiGardenDatabase
 import bonsai.habit.database.dao.BonsaiDao
-import bonsai.habit.database.dao.BonsaiStateDao
 import bonsai.habit.database.entity.Bonsai
-import bonsai.habit.database.entity.BonsaiState
 import junit.framework.TestCase.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -21,18 +19,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BonsaiStateDaoTest {
+class BonsaiDaoTest {
     private lateinit var bonsaiDao: BonsaiDao
-    private lateinit var bonsaiStateDao: BonsaiStateDao
     private lateinit var database: BonsaiGardenDatabase
 
     @Before
     fun setup() {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(), BonsaiGardenDatabase::class.java
-        ).allowMainThreadQueries()
-            .build()
-        bonsaiStateDao = database.bonsaiStateDao()
+        ).build()
         bonsaiDao = database.bonsaiDao()
     }
 
@@ -45,12 +40,11 @@ class BonsaiStateDaoTest {
     fun test_insert_inserted() {
         val bonsai = Bonsai(1, 10, 1, HealthState.GROWING)
         bonsaiDao.insert(bonsai)
-        val bonsaiState = BonsaiState(2, 5, 1, HealthState.GROWING)
-        bonsaiStateDao.insert(bonsaiState)
 
-        val insertedBonsaiState = bonsaiStateDao.getById(2)
-        assertEquals(bonsaiState.screenTime, insertedBonsaiState.screenTime)
-        assertEquals(HealthState.GROWING, insertedBonsaiState.healthState)
-        assertEquals(1, insertedBonsaiState.bonsaiId)
+        val insertedBonsai = bonsaiDao.getById(1)
+        assertEquals(10, insertedBonsai.targetTime)
+        assertEquals(1, insertedBonsai.age)
+        assertEquals(HealthState.GROWING, insertedBonsai.healthState)
+        assertEquals(1, insertedBonsai.id)
     }
 }

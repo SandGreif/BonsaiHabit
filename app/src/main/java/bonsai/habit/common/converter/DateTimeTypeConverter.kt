@@ -3,7 +3,7 @@
  * Copyright (c) 2024. All rights reserved.
  */
 
-package bonsai.habit.common
+package bonsai.habit.common.converter
 
 import androidx.room.TypeConverter
 import java.time.Instant
