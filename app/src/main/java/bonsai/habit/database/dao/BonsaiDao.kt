@@ -12,5 +12,5 @@ import bonsai.habit.database.entity.Bonsai
 @Dao
 interface BonsaiDao {
     @Insert
-    fun insertBonsai(bonsai: Bonsai)
+    fun insert(bonsai: Bonsai)
 }
