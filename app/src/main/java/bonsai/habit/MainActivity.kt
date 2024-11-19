@@ -16,17 +16,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import bonsai.habit.common.date.getStartOfDayInMs
 import bonsai.habit.ui.theme.BonsaiHabitTheme
+import bonsai.habit.usageStatistic.UsageStatistic
+import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val usageStatistic = UsageStatistic()
+        usageStatistic.requestUsageStatsPermission(this)
+        val time = UsageStatistic().getScreenTime(this, Calendar.getInstance().getStartOfDayInMs(),
+            System.currentTimeMillis())
         setContent {
             BonsaiHabitTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Bonsai habit",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
