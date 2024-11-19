@@ -3,7 +3,7 @@
  * Copyright (c) 2024. All rights reserved.
  */
 
-package bonsai.habit.common.date
+package bonsai.habit.common.time
 
 import java.util.Calendar
 

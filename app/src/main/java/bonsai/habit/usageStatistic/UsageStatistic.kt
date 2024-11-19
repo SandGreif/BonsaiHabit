@@ -10,20 +10,24 @@ import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
+import bonsai.habit.common.time.getStartOfDayInMs
+import java.util.Calendar
 
 /**
  * Get usage statistic for apps.
  */
 class UsageStatistic {
 
-    fun getScreenTime(context: Context, startTimeMs: Long, endTimeMs: Long): Long {
+    fun getScreenTimeForToday(context: Context): Long {
         val usageStatsManager = context.getSystemService(
             Context.USAGE_STATS_SERVICE
         ) as UsageStatsManager
+
+        // TODO filter for social media usage
         val usageStatsMap = usageStatsManager.queryAndAggregateUsageStats(
-            startTimeMs, endTimeMs
+            Calendar.getInstance().getStartOfDayInMs(), System.currentTimeMillis()
         )
-        return usageStatsMap.map { it.value.totalTimeInForeground }.sum()
+        return usageStatsMap.map { it.value.totalTimeVisible }.sum()
     }
 
     fun requestUsageStatsPermission(context: Context) {

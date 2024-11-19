@@ -18,9 +18,9 @@ class UsageStatisticTest {
     val usageStatistic = UsageStatistic()
 
     @Test
-    fun test_getScreenTime_forToday() {
+    fun test_getScreenTime_ForToday_forToday() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        val screenTime = usageStatistic.getScreenTime(appContext, 0, System.currentTimeMillis())
+        val screenTime = usageStatistic.getScreenTimeForToday(appContext, 0, System.currentTimeMillis())
         assertEquals(0, screenTime)
     }
 }
