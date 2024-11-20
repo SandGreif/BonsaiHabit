@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import bonsai.habit.common.time.msToMinutes
 import bonsai.habit.ui.theme.BonsaiHabitTheme
-import bonsai.habit.usageStatistic.AlarmManagerHelper
+import bonsai.habit.usageStatistic.alarm.AlarmManagerHelper
 import bonsai.habit.usageStatistic.UsageStatistic
 
 class MainActivity : ComponentActivity() {

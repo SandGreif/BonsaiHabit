@@ -3,17 +3,16 @@
  * Copyright (c) 2024. All rights reserved.
  */
 
-package bonsai.habit.usageStatistic
+package bonsai.habit.usageStatistic.alarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
+import java.util.Calendar
 
 /**
- * Alarm manager that sets an alarm and handles save used user statistics.
+ * Alarm manager that sets an alarm and defines the receiver.
  */
 class AlarmManagerHelper {
 
@@ -25,18 +24,18 @@ class AlarmManagerHelper {
         alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
             PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         }
-        alarmManager?.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + 60 * 1000,
+
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 23)
+            set(Calendar.MINUTE, 30)
+        }
+
+        alarmManager?.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
             alarmIntent
         )
-
-    }
-}
-
-class AlarmReceiver: BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-
-        val alarmMessage = intent?.getStringExtra("ALARM_MSG")
     }
 }
