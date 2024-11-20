@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import bonsai.habit.common.time.msToMinutes
 import bonsai.habit.ui.theme.BonsaiHabitTheme
+import bonsai.habit.usageStatistic.alarm.AlarmManagerHelper
 import bonsai.habit.usageStatistic.UsageStatistic
 
 class MainActivity : ComponentActivity() {
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
         val usageStatistic = UsageStatistic()
         usageStatistic.requestUsageStatsPermission(this)
         val time = UsageStatistic().getScreenTime(this).msToMinutes()
+        AlarmManagerHelper().setupAlarm(this)
         setContent {
             BonsaiHabitTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
