@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val usageStatistic = UsageStatistic()
         usageStatistic.requestUsageStatsPermission(this)
-        val time = UsageStatistic().getScreenTimeForToday(this).msToMinutes()
+        val time = UsageStatistic().getScreenTime(this).msToMinutes()
         setContent {
             BonsaiHabitTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
