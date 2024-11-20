@@ -17,4 +17,7 @@ interface BonsaiDao {
 
     @Query("SELECT * FROM Bonsai WHERE id = :id")
     fun getById(id: Int): Bonsai
+
+    @Query("SELECT * FROM Bonsai LIMIT 1")
+    fun getFirstEntity(): Bonsai?
 }
