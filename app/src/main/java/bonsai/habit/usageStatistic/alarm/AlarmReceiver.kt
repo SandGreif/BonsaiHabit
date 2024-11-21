@@ -9,11 +9,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import bonsai.habit.common.enums.HealthState
 import bonsai.habit.database.BonsaiGardenDatabase
+import bonsai.habit.database.entity.BonsaiState
+import bonsai.habit.usageStatistic.UsageStatistic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
 
 /**
  * Alarm receiver that is called when the alarm is triggered.
@@ -25,18 +28,12 @@ class AlarmReceiver: BroadcastReceiver() {
         private const val TAG = "AlarmReceiver"
     }
 
-    // TODO avoid long running tasks
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action == null) {
             if (context != null) {
-                Log.d(TAG, "AlarmReceiver called, save bonsai state")
-                // 1. check if bonsai exists
-                // 2. check if bonsai state exists for today
-                // 3. if no get usage statistic and save new bonsai state
-                // 4. refactor in a class with func
+                Log.d(TAG, "AlarmReceiver called, save or update bonsai state")
                 CoroutineScope(Dispatchers.IO).launch {
-                    val db = BonsaiGardenDatabase.getDatabase(context)
-                    val bonsai = db.bonsaiDao().getFirstEntity()
+                    BonsaiStateManager().saveBonsaiState(context)
                 }
             } else {
                 Log.e(TAG, "Context is null")

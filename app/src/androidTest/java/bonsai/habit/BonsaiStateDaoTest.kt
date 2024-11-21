@@ -15,8 +15,8 @@ import bonsai.habit.database.dao.BonsaiStateDao
 import bonsai.habit.database.entity.Bonsai
 import bonsai.habit.database.entity.BonsaiState
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertFalse
-import junit.framework.TestCase.assertTrue
+import junit.framework.TestCase.assertNotNull
+import junit.framework.TestCase.assertNull
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -59,17 +59,17 @@ class BonsaiStateDaoTest {
     }
 
     @Test
-    fun test_existsForDay_true() {
-        val result = bonsaiStateDao.entityExistsForDay(bonsaiState.createdAt)
-        assertTrue(result)
+    fun test_existsForDay_notNull() {
+        val result = bonsaiStateDao.entityForDay(bonsaiState.createdAt)
+        assertNotNull(result)
     }
 
     @Test
-    fun test_existsForDay_false() {
+    fun test_existsForDay_null() {
         val dateString = "2024-01-01T05:00:00"
         val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
         val localDateTime = LocalDateTime.parse(dateString, formatter)
-        val result = bonsaiStateDao.entityExistsForDay(localDateTime)
-        assertFalse(result)
+        val result = bonsaiStateDao.entityForDay(localDateTime)
+        assertNull(result)
     }
 }
