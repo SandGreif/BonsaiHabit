@@ -1,5 +1,5 @@
 /*
- * Created by julianmagierski on 16.11.2024
+ * Created by julianmagierski on 21.11.2024
  * Copyright (c) 2024. All rights reserved.
  */
 
@@ -13,25 +13,25 @@ import bonsai.habit.database.BonsaiGardenDatabase
 import bonsai.habit.database.dao.BonsaiDao
 import bonsai.habit.database.dao.BonsaiStateDao
 import bonsai.habit.database.entity.Bonsai
-import bonsai.habit.database.entity.BonsaiState
+import bonsai.habit.usageStatistic.BonsaiStateManager
+import bonsai.habit.usageStatistic.UsageStatistic
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertNull
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @RunWith(AndroidJUnit4::class)
-class BonsaiStateDaoTest {
+class BonsaiStateManagerTest {
     private lateinit var bonsaiDao: BonsaiDao
     private lateinit var bonsaiStateDao: BonsaiStateDao
     private lateinit var database: BonsaiGardenDatabase
 
     private val bonsai = Bonsai(1, 10, 1, HealthState.GROWING)
-    private val bonsaiState = BonsaiState(2, 5, 1, HealthState.GROWING)
+    private val bonsaiStateManager = BonsaiStateManager()
 
     @Before
     fun setup() {
@@ -42,7 +42,6 @@ class BonsaiStateDaoTest {
         bonsaiStateDao = database.bonsaiStateDao()
         bonsaiDao = database.bonsaiDao()
         bonsaiDao.insert(bonsai)
-        bonsaiStateDao.insert(bonsaiState)
     }
 
     @After
@@ -51,25 +50,14 @@ class BonsaiStateDaoTest {
     }
 
     @Test
-    fun test_insert_inserted() {
-        val insertedBonsaiState = bonsaiStateDao.getById(2)
-        assertEquals(bonsaiState.screenTime, insertedBonsaiState?.screenTime)
-        assertEquals(HealthState.GROWING, insertedBonsaiState?.healthState)
-        assertEquals(1, insertedBonsaiState?.bonsaiId)
-    }
-
-    @Test
-    fun test_existsForDay_notNull() {
-        val result = bonsaiStateDao.entityForDay(bonsaiState.createdAt)
-        assertNotNull(result)
-    }
-
-    @Test
-    fun test_existsForDay_null() {
-        val dateString = "2024-01-01T05:00:00"
-        val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
-        val localDateTime = LocalDateTime.parse(dateString, formatter)
-        val result = bonsaiStateDao.entityForDay(localDateTime)
-        assertNull(result)
+    fun test_saveBonsaiState_created() = runTest {
+        assertNull(bonsaiStateDao.getById(1))
+        bonsaiStateManager.saveBonsaiState(
+            context = ApplicationProvider.getApplicationContext(),
+            db = database
+        )
+        val createdBonsaiState = bonsaiStateDao.getById(1)
+        assertNotNull(createdBonsaiState)
+        assertEquals(HealthState.DYING, createdBonsaiState?.healthState)
     }
 }

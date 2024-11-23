@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - US1 setup database
 - US3 add basic usage statistics
 - US2 add alarm manager
+- US10 add save bonsai state

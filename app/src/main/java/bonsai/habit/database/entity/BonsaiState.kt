@@ -22,13 +22,13 @@ import java.time.LocalDateTime
 )
 data class BonsaiState(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     @ColumnInfo(name = "screenTime")
-    val screenTime: Int,
+    var screenTime: Long,
     @ColumnInfo(name = "bonsaiId")
     val bonsaiId: Int,
     @ColumnInfo(name = "healthState")
-    val healthState: HealthState,
+    var healthState: HealthState,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now()
 )
