@@ -16,7 +16,7 @@ data class Bonsai(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo(name = "targetTime")
-    val targetTime: Int,
+    val targetTime: Long,
     @ColumnInfo(name = "age")
     val age: Int,
     @ColumnInfo(name = "healthState")

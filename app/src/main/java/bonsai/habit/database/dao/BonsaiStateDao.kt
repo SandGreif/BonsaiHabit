@@ -21,7 +21,7 @@ interface BonsaiStateDao {
     fun update(bonsaiState: BonsaiState)
 
     @Query("SELECT * FROM BonsaiState WHERE id = :id")
-    fun getById(id: Int): BonsaiState
+    fun getById(id: Int): BonsaiState?
 
     @Query("SELECT * FROM BonsaiState WHERE date(createdAt / 1000,'unixepoch') " +
             "= date(:dateTime / 1000,'unixepoch') LIMIT 1")

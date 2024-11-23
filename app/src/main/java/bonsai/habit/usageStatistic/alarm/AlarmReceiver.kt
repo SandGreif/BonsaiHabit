@@ -9,14 +9,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import bonsai.habit.common.enums.HealthState
-import bonsai.habit.database.BonsaiGardenDatabase
-import bonsai.habit.database.entity.BonsaiState
-import bonsai.habit.usageStatistic.UsageStatistic
+import bonsai.habit.usageStatistic.BonsaiStateManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 /**
  * Alarm receiver that is called when the alarm is triggered.

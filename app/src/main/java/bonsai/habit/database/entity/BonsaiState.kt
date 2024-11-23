@@ -28,7 +28,7 @@ data class BonsaiState(
     @ColumnInfo(name = "bonsaiId")
     val bonsaiId: Int,
     @ColumnInfo(name = "healthState")
-    val healthState: HealthState,
+    var healthState: HealthState,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now()
 )
