@@ -9,17 +9,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import bonsai.habit.common.time.msToMinutes
 import bonsai.habit.ui.theme.BonsaiHabitTheme
 import bonsai.habit.usageStatistic.alarm.AlarmManagerHelper
 import bonsai.habit.usageStatistic.UsageStatistic
+import bonsai.habit.welcome.SetupWelcomeUi
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,29 +25,8 @@ class MainActivity : ComponentActivity() {
         AlarmManagerHelper().setupAlarm(this)
         setContent {
             BonsaiHabitTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Bonsai habit with " + time + "minutes screen time for today" ,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                SetupWelcomeUi(time)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BonsaiHabitTheme {
-        Greeting("Android")
     }
 }

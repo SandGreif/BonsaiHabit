@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - US3 add basic usage statistics
 - US2 add alarm manager
 - US10 add save bonsai state
+- US5 Add UI for target screen time
